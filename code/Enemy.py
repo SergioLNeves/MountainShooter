@@ -27,21 +27,18 @@ class BossEnemy(Enemy):
         self.direction = -1
 
     def move(self):
+        self.rect.centerx -= ENTITY_SPEED[self.name]/2
 
         # Movimento vertical: sobe e desce na tela
         self.rect.centery += self.speed * self.direction
-        self.rect.centerx -= ENTITY_SPEED[self.name]
 
-        # Movimento vertical: sobe e desce na tela
-        self.rect.centery += self.speed * self.direction
+        self.rect.centery += self.speed * self.direction   # Movimento vertical: sobe e desce na tela
 
-        # Verifica se bateu na borda superior
-        if self.rect.top <= 0:
+        if self.rect.top <= 0:  # Verifica se bateu na borda superior
             self.direction = 1  # Quando bater, muda a direção
             self.speed *= 2  # Dobra a velocidade ao descer
 
-        # Verifica se bateu na borda inferior
-        elif self.rect.bottom >= WIN_HEIGHT:
+        elif self.rect.bottom >= WIN_HEIGHT:  # Verifica se bateu na borda inferior
             self.direction = -1  # Muda direção para subir
             self.speed = ENTITY_SPEED[self.name]  # Reseta a velocidade normal ao subir
 

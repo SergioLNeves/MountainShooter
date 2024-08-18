@@ -31,12 +31,13 @@ class Level:
             player = EntityFactory.get_entity('Player2')
             player.score = player_score[1]
             self.entity_list.append(player)
-        pygame.time.set_timer(EVENT_ENEMY, SPAWN_TIME)
-        pygame.time.set_timer(EVENT_TIMEOUT, TIMEOUT_STEP)  # 100ms
         self.phase = phase
-
         if self.phase == 3:
             self.timeout *= 2
+            pygame.time.set_timer(EVENT_ENEMY, SPAWN_TIME * 2)
+        else:
+            pygame.time.set_timer(EVENT_ENEMY, SPAWN_TIME)
+        pygame.time.set_timer(EVENT_TIMEOUT, TIMEOUT_STEP)  # 100ms
 
     def run(self, player_score: list[int]):
         pygame.mixer_music.load(f'./asset/{self.name}.mp3')
